@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>6030 Rancho Mission Rd #369 — Mission Valley Rental</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
+  *, *::before, *::after { box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; margin: 0; }
+  .gallery-btn img { transition: transform .3s ease; }
+  .gallery-btn:hover img { transform: scale(1.02); }
+</style>
+</head>
+<body class="min-h-screen bg-neutral-50 text-neutral-900">
+
+  <!-- ─── HERO ─── -->
+  <section class="relative overflow-hidden border-b border-neutral-200 bg-white">
+    <div class="absolute inset-0 bg-gradient-to-br from-neutral-100 via-white to-emerald-50"></div>
+    <div class="relative mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-[1.1fr_0.9fr] md:px-10 lg:px-12 lg:py-20">
+
+      <!-- Left column -->
+      <div class="flex flex-col justify-center">
+        <div class="mb-4 inline-flex w-fit items-center rounded-full border border-neutral-300 bg-white/80 px-3 py-1 text-sm text-neutral-700 shadow-sm backdrop-blur">
+          Mission Valley Rental Listing
+        </div>
+        <h1 class="max-w-3xl text-4xl font-semibold tracking-tight text-neutral-950 md:text-5xl">
+          6030 Rancho Mission Rd #369
+        </h1>
+        <p class="mt-3 text-lg text-neutral-600 md:text-xl">
+          Updated 1 bedroom condo with a private patio, refreshed finishes, and two parking spaces in a central San Diego location.
+        </p>
+
+        <!-- Price cards -->
+        <div class="mt-8 flex flex-wrap gap-3">
+          <div class="rounded-2xl bg-neutral-950 px-5 py-3 text-white shadow-sm">
+            <div class="text-xs uppercase tracking-[0.18em] text-neutral-300">Monthly Rent</div>
+            <div class="mt-1 text-2xl font-semibold">$2,049</div>
+          </div>
+          <div class="rounded-2xl border border-neutral-300 bg-white px-5 py-3 shadow-sm">
+            <div class="text-xs uppercase tracking-[0.18em] text-neutral-500">Security Deposit</div>
+            <div class="mt-1 text-2xl font-semibold">$2,049</div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="mt-8 grid gap-3 sm:grid-cols-3">
+          <div class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+            <div class="text-2xl font-semibold text-neutral-950">1</div>
+            <div class="mt-1 text-sm text-neutral-600">Bedroom</div>
+          </div>
+          <div class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+            <div class="text-2xl font-semibold text-neutral-950">1</div>
+            <div class="mt-1 text-sm text-neutral-600">Bathroom</div>
+          </div>
+          <div class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
+            <div class="text-2xl font-semibold text-neutral-950">530</div>
+            <div class="mt-1 text-sm text-neutral-600">Sq Ft</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column — featured photo -->
+      <div class="relative">
+        <div class="overflow-hidden rounded-[2rem] border border-neutral-200 bg-white p-3 shadow-xl shadow-neutral-200/70">
+          <img id="featured-img" src="" alt="" class="h-[420px] w-full rounded-[1.5rem] object-cover" />
+          <div class="mt-3 flex items-center justify-between gap-4 px-1">
+            <div>
+              <div id="featured-label" class="text-sm font-medium text-neutral-900"></div>
+              <div class="text-sm text-neutral-500">Selected photo from the gallery</div>
+            </div>
+            <div id="featured-counter" class="text-sm text-neutral-500"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── HIGHLIGHTS + SCREENING ─── -->
+  <section class="mx-auto grid max-w-7xl gap-6 px-6 py-10 md:grid-cols-[1.05fr_0.95fr] md:px-10 lg:px-12">
+
+    <!-- Listing highlights -->
+    <div class="rounded-[2rem] border border-neutral-200 bg-white p-7 shadow-sm">
+      <h2 class="text-2xl font-semibold tracking-tight">Listing highlights</h2>
+      <p class="mt-3 max-w-2xl text-neutral-600">
+        Move in ready ground floor condo with a clean, modern refresh. The home includes fresh paint, new kitchen appliances, luxury vinyl plank flooring, a newly refinished bathroom, useful storage, and a private patio for outdoor space.
+      </p>
+      <div id="features-grid" class="mt-6 grid gap-3 sm:grid-cols-2"></div>
+    </div>
+
+    <!-- Application standards -->
+    <div class="rounded-[2rem] border border-neutral-200 bg-white p-7 shadow-sm">
+      <h2 class="text-2xl font-semibold tracking-tight">Application standards</h2>
+      <p class="mt-3 text-neutral-600">
+        The goal is a straightforward, professional leasing process that attracts well qualified applicants while remaining compliant with applicable California and local housing rules.
+      </p>
+      <div id="screening-list" class="mt-6 space-y-3"></div>
+    </div>
+  </section>
+
+  <!-- ─── PHOTO GALLERY ─── -->
+  <section class="mx-auto max-w-7xl px-6 pb-6 md:px-10 lg:px-12">
+    <div class="rounded-[2rem] border border-neutral-200 bg-white p-7 shadow-sm">
+      <div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-2xl font-semibold tracking-tight">Photo gallery</h2>
+          <p class="mt-2 text-neutral-600">A clean visual overview of the interior, patio, and community amenities.</p>
+        </div>
+        <div class="text-sm text-neutral-500">Click any image to feature it above.</div>
+      </div>
+      <div id="gallery-grid" class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5"></div>
+    </div>
+  </section>
+
+  <!-- ─── CTA ─── -->
+  <section class="mx-auto max-w-7xl px-6 py-6 md:px-10 lg:px-12">
+    <div class="grid gap-6 md:grid-cols-[1fr_auto] rounded-[2rem] border border-neutral-200 bg-neutral-950 p-8 text-white shadow-lg shadow-neutral-300/40">
+      <div>
+        <div class="text-sm uppercase tracking-[0.18em] text-neutral-400">Rental summary</div>
+        <h3 class="mt-2 text-3xl font-semibold tracking-tight">Clean, central, and ready now!</h3>
+        <p class="mt-3 max-w-3xl text-neutral-300">
+          For info or showings, <a href="sms:+18582154192">text us at 858-215-4192</a> or <a href="mailto:applications@yourpropertysd.com?subject=6030%20Rancho%20Mission%20Rd%20%23369%20Inquiry">email applications@yourpropertysd.com</a>
+        </p>
+      </div>
+      <!-- <div class="flex items-center">
+        <a href="mailto:applications@yourpropertysd.com?subject=6030%20Rancho%20Mission%20Rd%20%23369%20Inquiry"
+           class="inline-flex items-center justify-center rounded-2xl bg-white px-5 py-3 text-sm font-medium text-neutral-950 shadow-sm transition hover:bg-neutral-100">
+          Request a showing
+        </a>
+      </div> -->
+    </div>
+  </section>
+
+<script>
+/* ── DATA ── */
+const photos = [
+  { src: "28-front.jpg", alt: "Front exterior of the community", label: "Exterior" },
+  { src: "1-living.jpg", alt: "Living room", label: "Living room" },
+  { src: "3-living.jpg", alt: "Living room alt", label: "Living room alt" },
+  { src: "4-living.jpg", alt: "Living room alt", label: "Living room alt" },
+  { src: "6-living.jpg", alt: "Living room alt", label: "Living room alt" },
+  { src: "8-nook.jpg", alt: "Dining area", label: "Dining area" },
+  { src: "9-kitchen.jpg", alt: "Kitchen", label: "Kitchen" },
+  { src: "11-kitchen.jpg", alt: "Kitchen", label: "Kitchen" },
+  { src: "14-pantry.jpg", alt: "Linens", label: "Hall closet" },
+  { src: "15-patio.jpg", alt: "Patio", label: "Patio" },
+  { src: "17-bedroom.jpg", alt: "Bedroom", label: "Bedroom" },
+  { src: "19-bedroom.jpg", alt: "Bedroom", label: "Bedroom" },
+  { src: "23-bathroom.jpg", alt: "Bathroom", label: "Bathroom" },
+  { src: "30-pool.jpg", alt: "Pool", label: "Pool" },
+  { src: "34-hottub.jpg", alt: "Hot tub", label: "Hot tub" },
+  { src: "40-tennis.jpg", alt: "Tennis court", label: "Tennis court" },
+  { src: "39laundry.jpg", alt: "Laundry", label: "Laundry" }
+];
+
+const features = [
+  "$2,075 per month",
+  "$2,075 security deposit",
+  "1 bedroom and 1 bathroom",
+  "Approx. 530 square feet",
+  "Ground floor location",
+  "Fresh interior paint",
+  "New kitchen appliances",
+  "Luxury vinyl plank flooring",
+  "Newly refinished bathroom",
+  "Private patio",
+  "Good in unit storage",
+  "2 parking spaces: 1 assigned and 1 unassigned"
+];
+
+const screening = [
+  "Verifiable gross income of 2.5x monthly rent",
+  "Credit profile around 680+ is preferred, credit evaluated holistically including payment history and debt profile",
+  "Background screening conducted in compliance with applicable laws and fair housing guidance",
+  "Favorable rental history; prior evictions may be considered based on recency and circumstances",
+  "Renters insurance required before move in",
+  "Pets considered case by case, subject to insurance eligibility, HOA rules, and additional deposit",
+  "Emotional support animals are handled as reasonable accommodation requests and require valid, California-compliant documentation from a licensed provider; documentation will be verified.",
+  "Non-smoking home",
+  "Applications reviewed in compliance with California and local fair housing requirements"
+];
+
+/* ── STATE ── */
+let active = 0;
+
+/* ── RENDER HELPERS ── */
+function updateFeatured() {
+  const img = document.getElementById('featured-img');
+  const label = document.getElementById('featured-label');
+  const counter = document.getElementById('featured-counter');
+  img.src = photos[active].src;
+  img.alt = photos[active].alt;
+  label.textContent = photos[active].label;
+  counter.textContent = (active + 1) + ' / ' + photos.length;
+  document.querySelectorAll('.gallery-btn').forEach((btn, i) => {
+    if (i === active) {
+      btn.className = btn.className.replace('border-neutral-200 hover:border-neutral-400', '').replace('border-neutral-900 ring-2 ring-neutral-900/10', '') + ' border-neutral-900 ring-2 ring-neutral-900/10';
+    } else {
+      btn.className = btn.className.replace('border-neutral-900 ring-2 ring-neutral-900/10', '') + ' border-neutral-200 hover:border-neutral-400';
+    }
+  });
+}
+
+function buildFeatures() {
+  const grid = document.getElementById('features-grid');
+  features.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'rounded-2xl bg-neutral-50 px-4 py-3 text-sm text-neutral-700 ring-1 ring-inset ring-neutral-200';
+    div.textContent = item;
+    grid.appendChild(div);
+  });
+}
+
+function buildScreening() {
+  const list = document.getElementById('screening-list');
+  screening.forEach(item => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'flex gap-3 rounded-2xl bg-neutral-50 px-4 py-3 ring-1 ring-inset ring-neutral-200';
+    const dot = document.createElement('div');
+    dot.className = 'mt-1 h-2.5 w-2.5 flex-none rounded-full bg-emerald-500';
+    const p = document.createElement('p');
+    p.className = 'text-sm text-neutral-700';
+    p.textContent = item;
+    wrapper.appendChild(dot);
+    wrapper.appendChild(p);
+    list.appendChild(wrapper);
+  });
+}
+
+function buildGallery() {
+  const grid = document.getElementById('gallery-grid');
+  photos.forEach((photo, index) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'gallery-btn group overflow-hidden rounded-[1.5rem] border bg-neutral-50 text-left shadow-sm transition border-neutral-200 hover:border-neutral-400';
+    btn.onclick = () => { active = index; updateFeatured(); };
+
+    const img = document.createElement('img');
+    img.src = photo.src;
+    img.alt = photo.alt;
+    img.className = 'h-40 w-full object-cover transition duration-300 group-hover:scale-[1.02]';
+
+    const info = document.createElement('div');
+    info.className = 'px-4 py-3';
+
+    const name = document.createElement('div');
+    name.className = 'text-sm font-medium text-neutral-900';
+    name.textContent = photo.label;
+
+    const desc = document.createElement('div');
+    desc.className = 'mt-1 text-xs text-neutral-500';
+    desc.textContent = photo.alt;
+
+    info.appendChild(name);
+    info.appendChild(desc);
+    btn.appendChild(img);
+    btn.appendChild(info);
+    grid.appendChild(btn);
+  });
+}
+
+/* ── INIT ── */
+buildFeatures();
+buildScreening();
+buildGallery();
+updateFeatured();
+</script>
+</body>
+</html>
