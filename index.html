@@ -11,15 +11,104 @@
   body { font-family: 'DM Sans', sans-serif; margin: 0; }
   .gallery-btn img { transition: transform .3s ease; }
   .gallery-btn:hover img { transform: scale(1.02); }
+
+  /* ── LIGHTBOX ── */
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+  }
+  #lightbox.open { display: flex; }
+
+  #lightbox-img {
+    max-width: min(92vw, 1200px);
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    border-radius: 1.25rem;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+    object-fit: contain;
+    transition: opacity 0.18s ease;
+  }
+
+  #lightbox-close {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+    backdrop-filter: blur(4px);
+  }
+  #lightbox-close:hover { background: rgba(255,255,255,0.22); }
+
+  .lb-arrow {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 1.35rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+    backdrop-filter: blur(4px);
+    user-select: none;
+  }
+  .lb-arrow:hover { background: rgba(255,255,255,0.22); }
+  #lb-prev { left: 1.25rem; }
+  #lb-next { right: 1.25rem; }
+
+  #lightbox-caption {
+    position: fixed;
+    bottom: 1.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.75);
+    font-size: 0.875rem;
+    text-align: center;
+    white-space: nowrap;
+    pointer-events: none;
+  }
 </style>
 </head>
 <body class="min-h-screen bg-neutral-50 text-neutral-900">
+
+  <!-- ─── LIGHTBOX OVERLAY ─── -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox">
+    <button id="lightbox-close" aria-label="Close lightbox">&#x2715;</button>
+    <button class="lb-arrow" id="lb-prev" aria-label="Previous photo">&#8592;</button>
+    <img id="lightbox-img" src="" alt="" />
+    <button class="lb-arrow" id="lb-next" aria-label="Next photo">&#8594;</button>
+    <div id="lightbox-caption"></div>
+  </div>
 
   <!-- ─── HERO ─── -->
   <section class="relative overflow-hidden border-b border-neutral-200 bg-white">
     <div class="absolute inset-0 bg-gradient-to-br from-neutral-100 via-white to-emerald-50"></div>
     <div class="relative mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-[1.1fr_0.9fr] md:px-10 lg:px-12 lg:py-20">
-
       <!-- Left column -->
       <div class="flex flex-col justify-center">
         <div class="mb-4 inline-flex w-fit items-center rounded-full border border-neutral-300 bg-white/80 px-3 py-1 text-sm text-neutral-700 shadow-sm backdrop-blur">
@@ -31,7 +120,6 @@
         <p class="mt-3 text-lg text-neutral-600 md:text-xl">
           Updated 1 bedroom condo with a private patio, refreshed finishes, and two parking spaces in a central San Diego location.
         </p>
-
         <!-- Price cards -->
         <div class="mt-8 flex flex-wrap gap-3">
           <div class="rounded-2xl bg-neutral-950 px-5 py-3 text-white shadow-sm">
@@ -43,7 +131,6 @@
             <div class="mt-1 text-2xl font-semibold">$2,049</div>
           </div>
         </div>
-
         <!-- Stats -->
         <div class="mt-8 grid gap-3 sm:grid-cols-3">
           <div class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
@@ -60,7 +147,6 @@
           </div>
         </div>
       </div>
-
       <!-- Right column — featured photo -->
       <div class="relative">
         <div class="overflow-hidden rounded-[2rem] border border-neutral-200 bg-white p-3 shadow-xl shadow-neutral-200/70">
@@ -68,7 +154,7 @@
           <div class="mt-3 flex items-center justify-between gap-4 px-1">
             <div>
               <div id="featured-label" class="text-sm font-medium text-neutral-900"></div>
-              <div class="text-sm text-neutral-500">Selected photo from the gallery</div>
+              <div class="text-sm text-neutral-500">Featured photo</div>
             </div>
             <div id="featured-counter" class="text-sm text-neutral-500"></div>
           </div>
@@ -79,7 +165,6 @@
 
   <!-- ─── HIGHLIGHTS + SCREENING ─── -->
   <section class="mx-auto grid max-w-7xl gap-6 px-6 py-10 md:grid-cols-[1.05fr_0.95fr] md:px-10 lg:px-12">
-
     <!-- Listing highlights -->
     <div class="rounded-[2rem] border border-neutral-200 bg-white p-7 shadow-sm">
       <h2 class="text-2xl font-semibold tracking-tight">Listing highlights</h2>
@@ -88,7 +173,6 @@
       </p>
       <div id="features-grid" class="mt-6 grid gap-3 sm:grid-cols-2"></div>
     </div>
-
     <!-- Application standards -->
     <div class="rounded-[2rem] border border-neutral-200 bg-white p-7 shadow-sm">
       <h2 class="text-2xl font-semibold tracking-tight">Application standards</h2>
@@ -107,7 +191,7 @@
           <h2 class="text-2xl font-semibold tracking-tight">Photo gallery</h2>
           <p class="mt-2 text-neutral-600">A clean visual overview of the interior, patio, and community amenities.</p>
         </div>
-        <div class="text-sm text-neutral-500">Click any image to feature it above.</div>
+        <div class="text-sm text-neutral-500">Click any image to view full size.</div>
       </div>
       <div id="gallery-grid" class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5"></div>
     </div>
@@ -123,12 +207,6 @@
           For info or showings, <a href="sms:+18582154192">text us at 858-215-4192</a> or <a href="mailto:applications@yourpropertysd.com?subject=6030%20Rancho%20Mission%20Rd%20%23369%20Inquiry">email applications@yourpropertysd.com</a>
         </p>
       </div>
-      <!-- <div class="flex items-center">
-        <a href="mailto:applications@yourpropertysd.com?subject=6030%20Rancho%20Mission%20Rd%20%23369%20Inquiry"
-           class="inline-flex items-center justify-center rounded-2xl bg-white px-5 py-3 text-sm font-medium text-neutral-950 shadow-sm transition hover:bg-neutral-100">
-          Request a showing
-        </a>
-      </div> -->
     </div>
   </section>
 
@@ -153,7 +231,6 @@ const photos = [
   { src: "40-tennis.jpg", alt: "Tennis court", label: "Tennis court" },
   { src: "39laundry.jpg", alt: "Laundry", label: "Laundry" }
 ];
-
 const features = [
   "$2,075 per month",
   "$2,075 security deposit",
@@ -168,7 +245,6 @@ const features = [
   "Good in unit storage",
   "2 parking spaces: 1 assigned and 1 unassigned"
 ];
-
 const screening = [
   "Verifiable gross income of 2.5x monthly rent",
   "Credit profile around 680+ is preferred, credit evaluated holistically including payment history and debt profile",
@@ -181,27 +257,65 @@ const screening = [
   "Applications reviewed in compliance with California and local fair housing requirements"
 ];
 
-/* ── STATE ── */
-let active = 0;
+/* ── LIGHTBOX STATE ── */
+let lbActive = 0;
 
-/* ── RENDER HELPERS ── */
-function updateFeatured() {
-  const img = document.getElementById('featured-img');
-  const label = document.getElementById('featured-label');
-  const counter = document.getElementById('featured-counter');
-  img.src = photos[active].src;
-  img.alt = photos[active].alt;
-  label.textContent = photos[active].label;
-  counter.textContent = (active + 1) + ' / ' + photos.length;
-  document.querySelectorAll('.gallery-btn').forEach((btn, i) => {
-    if (i === active) {
-      btn.className = btn.className.replace('border-neutral-200 hover:border-neutral-400', '').replace('border-neutral-900 ring-2 ring-neutral-900/10', '') + ' border-neutral-900 ring-2 ring-neutral-900/10';
-    } else {
-      btn.className = btn.className.replace('border-neutral-900 ring-2 ring-neutral-900/10', '') + ' border-neutral-200 hover:border-neutral-400';
-    }
-  });
+function openLightbox(index) {
+  lbActive = index;
+  renderLightbox();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function navigateLightbox(dir) {
+  lbActive = (lbActive + dir + photos.length) % photos.length;
+  renderLightbox();
+}
+
+function renderLightbox() {
+  const img = document.getElementById('lightbox-img');
+  const caption = document.getElementById('lightbox-caption');
+  img.style.opacity = '0';
+  setTimeout(() => {
+    img.src = photos[lbActive].src;
+    img.alt = photos[lbActive].alt;
+    img.style.opacity = '1';
+  }, 80);
+  caption.textContent = photos[lbActive].label + '  ·  ' + (lbActive + 1) + ' / ' + photos.length;
+}
+
+/* ── LIGHTBOX CONTROLS ── */
+document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+document.getElementById('lb-prev').addEventListener('click', () => navigateLightbox(-1));
+document.getElementById('lb-next').addEventListener('click', () => navigateLightbox(1));
+
+// Click backdrop (not image) to close
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+
+// Keyboard: Escape to close, arrows to navigate
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') navigateLightbox(-1);
+  if (e.key === 'ArrowRight') navigateLightbox(1);
+});
+
+/* ── FEATURED PHOTO (static, shows first photo) ── */
+function initFeatured() {
+  document.getElementById('featured-img').src = photos[0].src;
+  document.getElementById('featured-img').alt = photos[0].alt;
+  document.getElementById('featured-label').textContent = photos[0].label;
+  document.getElementById('featured-counter').textContent = photos.length + ' photos';
+}
+
+/* ── RENDER HELPERS ── */
 function buildFeatures() {
   const grid = document.getElementById('features-grid');
   features.forEach(item => {
@@ -233,25 +347,20 @@ function buildGallery() {
   photos.forEach((photo, index) => {
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'gallery-btn group overflow-hidden rounded-[1.5rem] border bg-neutral-50 text-left shadow-sm transition border-neutral-200 hover:border-neutral-400';
-    btn.onclick = () => { active = index; updateFeatured(); };
-
+    btn.className = 'gallery-btn group overflow-hidden rounded-[1.5rem] border border-neutral-200 bg-neutral-50 text-left shadow-sm transition hover:border-neutral-400 cursor-zoom-in';
+    btn.onclick = () => openLightbox(index);
     const img = document.createElement('img');
     img.src = photo.src;
     img.alt = photo.alt;
     img.className = 'h-40 w-full object-cover transition duration-300 group-hover:scale-[1.02]';
-
     const info = document.createElement('div');
     info.className = 'px-4 py-3';
-
     const name = document.createElement('div');
     name.className = 'text-sm font-medium text-neutral-900';
     name.textContent = photo.label;
-
     const desc = document.createElement('div');
     desc.className = 'mt-1 text-xs text-neutral-500';
     desc.textContent = photo.alt;
-
     info.appendChild(name);
     info.appendChild(desc);
     btn.appendChild(img);
@@ -261,10 +370,10 @@ function buildGallery() {
 }
 
 /* ── INIT ── */
+initFeatured();
 buildFeatures();
 buildScreening();
 buildGallery();
-updateFeatured();
 </script>
 </body>
 </html>
